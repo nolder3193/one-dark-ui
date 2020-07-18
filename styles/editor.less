@@ -6,20 +6,23 @@ atom-panel-container atom-text-editor.is-focused {
   .focus();
 }
 
+.editor {
+  font-weight: @font-weight;
+}
 
 // Mini
 // Usually just single line inputs
 
 atom-text-editor[mini] {
-  overflow: auto;
+  background-color: @input-background-color;
+  border-radius: @component-border-radius;
+  border: 1px solid @input-border-color;
+  color: @text-color-highlight;
   font-size: @ui-input-size;
   line-height: @ui-line-height;
   max-height: @ui-line-height * 5; // rows
+  overflow: auto;
   padding-left: @ui-padding/3;
-  border-radius: @component-border-radius;
-  color: @text-color-highlight;
-  border: 1px solid @input-border-color;
-  background-color: @input-background-color;
 
   .placeholder-text {
     color: @text-color-subtle;

@@ -3,17 +3,17 @@
 
 @tab-border: 1px solid @tab-border-color;
 @title-padding: .66em;
-@icon-padding-top: .5em; // 2.5 (total) - 1.5 (text) / 2
+@icon-padding-top: 2em; // 2.5 (total) - 1.5 (text) / 2
 @icon-padding-right: .5em;
 
 .tab-bar {
-  position: relative;
-  height: @ui-tab-height;
-  box-shadow: inset 0 -1px 0 @tab-border-color;
   background: @tab-bar-background-color;
+  border-radius: 0;
+  box-shadow: inset 0 -1px 0 @tab-border-color;
+  height: @ui-tab-height;
   overflow-x: auto;
   overflow-y: hidden;
-  border-radius: 0;
+  position: relative;
 
   &::-webkit-scrollbar {
     display: none;
@@ -27,29 +27,37 @@
   // Tab ----------------------
 
   .tab {
+    background-color: @tab-background-color;
+    border-left: @tab-border;
+    box-shadow: inherit;
+    color: @tab-text-color;
+    font-size: inherit;
+    height: inherit;
+    line-height: @ui-tab-height;
+    margin: 0;
+    padding: 0;
     position: relative;
     top: 0;
-    padding: 0;
-    margin: 0;
-    height: inherit;
-    font-size: inherit;
-    line-height: @ui-tab-height;
-    color: @tab-text-color;
-    background-color: @tab-background-color;
-    box-shadow: inherit;
-    border-left: @tab-border;
+
     &.active {
       color: @tab-text-color-active;
       background-color: @tab-background-color-active;
       box-shadow: none;
+
+      .title {
+        font-weight: 700;
+      }
     }
+
     &:first-of-type {
       border-left-color: transparent;
     }
+
     &:last-of-type {
       // use box-shadow to not take up any space
       box-shadow: inset 0 -1px 0 @tab-border-color, 1px 0 0 @base-border-color;
     }
+
     &.active:last-of-type {
       box-shadow: 1px 0 0 @base-border-color;
     }
@@ -58,8 +66,9 @@
     // Title ----------------------
 
     .title {
-      text-align: center;
+      font-size: 1.25em;
       margin: 0 @title-padding;
+      text-align: center;
     }
 
     // VCS coloring ----------------------
@@ -70,48 +79,52 @@
     // Icons ----------------------
 
     .title.title:before {
-      margin-right: .3em;
-      width: auto;
+      font-size: 1.125em;
       height: auto;
       line-height: 1;
-      font-size: 1.125em;
+      margin-right: .3em;
+      width: auto;
       vertical-align: -.0625em; // Adjust center for the 0.1em font-size increase
     }
 
     // Close icon ----------------------
 
     .close-icon {
-      top: @icon-padding-top;
-      right: @icon-padding-right;
-      z-index: 2;
+      background-color: inherit;
+      border-radius: @component-border-radius;
       font-size: 1em;
-      width: 1.5em;
       height: 1.5em;
       line-height: 1.5;
-      text-align: center;
-      border-radius: @component-border-radius;
-      background-color: inherit;
       overflow: hidden;
-      transform: scale(0);
+      right: @icon-padding-right;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%) scale(0);
       transition: transform .08s;
+      width: 1.5em;
+      z-index: 2;
+
       &:hover {
         color: @accent-text-color;
         background-color: @accent-color;
       }
+
       &:active {
         background-color: fade(@accent-color, 50%);
       }
+
       &::before {
-        z-index: 1;
         font-size: 1.1em;
-        vertical-align: -.05em; // Adjust center for the 0.1em font-size increase
-        width: auto;
         height: auto;
         pointer-events: none;
+        vertical-align: -.05em; // Adjust center for the 0.1em font-size increase
+        width: auto;
+        z-index: 1;
       }
     }
+
     &:hover .close-icon {
-      transform: scale(1);
+      transform: translateY(-50%);
       transition-duration: .16s;
     }
   }
@@ -121,20 +134,23 @@
   .tab.modified {
     &:hover .close-icon {
       color: @accent-color;
+
       &:hover {
         color: @accent-bg-text-color;
       }
     }
+
     &:not(:hover) .close-icon {
-      top: @icon-padding-top;
-      right: @icon-padding-right;
-      width: 1.5em;
-      height: 1.5em;
-      line-height: 1.5;
-      color: @accent-color;
       border-radius: @component-border-radius;
       border: none;
-      transform: scale(1);
+      color: @accent-color;
+      height: 1.5em;
+      line-height: 1.5;
+      right: @icon-padding-right;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.5em;
+
       &::before {
         content: "\f052";
         display: inline-block;
