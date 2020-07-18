@@ -131,6 +131,10 @@
 		&:after {
 			background-color: @accent-text-color;
 		}
+
+		&:not(:checked):hover {
+			background-color: lighten(@background-color-selected, 5%);
+		}
 	}
 
 	.search-container .btn {
